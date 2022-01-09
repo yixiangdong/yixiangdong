@@ -19,7 +19,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Repository master branch
-      - uses: actions/checkout@main 
+        uses: actions/checkout@main 
 
       # Runs a single command using the runners shell
       - name: Setup Node.js 12.x 
