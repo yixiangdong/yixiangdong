@@ -1,0 +1,4 @@
+options:
+  overwriteImages: false
+  askImageFilename: true
+  imagePrefix: pasted-
