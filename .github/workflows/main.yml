@@ -18,35 +18,35 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout Repository master branch
-        uses: actions/checkout@main 
+    - name: Checkout Repository master branch
+      uses: actions/checkout@main 
 
-      # Runs a single command using the runners shell
-      - name: Setup Node.js 12.x 
-        uses: actions/setup-node@main
-        with:
-          node-version: "12.x"
+    # Runs a single command using the runners shell
+    - name: Setup Node.js 12.x 
+      uses: actions/setup-node@main
+      with:
+        node-version: "12.x"
 
       # Runs a set of commands using the runners shell
-      - name: Setup Hexo Dependencies
-        run: |
-          npm install hexo-cli -g
-          npm install
+    - name: Setup Hexo Dependencies
+      run: |
+        npm install hexo-cli -g
+        npm install
           
-      - name: Setup Deploy Private Key
-        env:
-          HEXO_DEPLOY_PRIVATE_KEY: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
-        run: |
+    - name: Setup Deploy Private Key
+      env:
+        HEXO_DEPLOY_PRIVATE_KEY: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
+      run: |
           mkdir -p ~/.ssh/
           echo "$HEXO_DEPLOY_PRIVATE_KEY" > ~/.ssh/id_rsa 
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - name: Setup Git Infomation
-        run: | 
-          git config --global user.name 'yixiangdong' 
+    - name: Setup Git Infomation
+      run: | 
+         git config --global user.name 'yixiangdong' 
           git config --global user.email '1960105914@qq.com'
-      - name: Deploy Hexo 
-        run: |
+    - name: Deploy Hexo 
+      run: |
           hexo clean
           hexo generate 
           hexo deploy
